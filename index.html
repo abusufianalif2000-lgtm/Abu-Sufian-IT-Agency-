@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Abu Sufian IT Agency | Professional Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a2a3a;
+            --accent: #00d2ff;
+            --secondary: #3a4b5c;
+            --fb: #1877F2;
+            --tg: #0088cc;
+            --yt: #FF0000;
+            --tt: #000000;
+            --ig: #E1306C;
+            --wa: #25D366;
+            --premium: #f39c12;
+        }
+
+        html, body { 
+            overflow: hidden; 
+            height: 100%; 
+            position: fixed; 
+            width: 100%; 
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif; 
+            background-color: #f0f2f5; 
+            margin: 0; 
+            padding: 0; 
+            color: #333; 
+            touch-action: none; 
+        }
+
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 45px 20px; text-align: center; border-bottom: 4px solid var(--accent); }
+        header h1 { margin: 0; font-size: 1.5rem; letter-spacing: 1px; text-transform: uppercase; }
+        header p { margin: 5px 0 0; opacity: 0.8; font-size: 0.85rem; }
+
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            padding: 20px 15px; 
+            height: calc(100vh - 150px); 
+            overflow-y: auto; 
+            box-sizing: border-box;
+            touch-action: pan-y; 
+        }
+
+        .main-nav { 
+            display: flex; 
+            justify-content: center; 
+            gap: 8px; 
+            margin: -35px 0 25px; 
+            background: white;
+            padding: 8px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .tab-btn { 
+            flex: 1; 
+            background: transparent; 
+            border: none; 
+            padding: 10px 2px; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-weight: 700; 
+            transition: all 0.3s ease; 
+            color: var(--secondary); 
+            font-size: 0.65rem; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid #eee;
+        }
+        .tab-btn i { font-size: 1rem; opacity: 0.7; }
+
+        .tab-btn.active { 
+            background: var(--primary); 
+            color: white; 
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(26, 42, 58, 0.3);
+            transform: translateY(-2px);
+        }
+        .tab-btn.active i { opacity: 1; color: var(--accent); }
+
+        .content-section { display: none; animation: fadeIn 0.4s ease-out; }
+        .content-section.active { display: block; }
+        @keyframes fadeIn { from {opacity: 0; transform: translateY(15px);} to {opacity: 1; transform: translateY(0);} }
+
+        .intro-box { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--accent); margin-bottom: 20px; }
+        .intro-box h2 { color: var(--primary); margin-top: 0; font-size: 1.3rem; }
+        .intro-box p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 0; text-align: justify; }
+
+        /* কার্ড গ্রিড আপডেট */
+        .service-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .card { background: white; border-radius: 18px; padding: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); text-align: center; border: 1px solid #f0f0f0; }
+        .card h4 { margin: 12px 0 8px; font-size: 0.9rem; font-weight: 800; }
+
+        .premium-list { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        .premium-item { background: white; padding: 15px; border-radius: 12px; font-size: 14px; font-weight: bold; border-left: 5px solid var(--premium); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+
+        .project-list { background: white; border-radius: 18px; padding: 5px; overflow: hidden; }
+        .project-item { padding: 15px; border-bottom: 1px solid #f5f5f5; font-weight: 600; color: var(--primary); display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
+
+        .btn { border: none; border-radius: 10px; padding: 10px; cursor: pointer; text-decoration: none; font-weight: 700; font-size: 11px; display: inline-flex; align-items: center; gap: 6px; justify-content: center; }
+        .btn-main { background: var(--primary); color: white; width: 100%; box-sizing: border-box; }
+        .btn-tg { background: var(--tg); color: white; width: 100%; margin-top: 15px; padding: 14px; font-size: 14px; }
+        .btn-sm { background: #f8f9fa; color: #666; font-size: 10px; padding: 5px 10px; border: 1px solid #eee; margin-bottom: 8px; }
+
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); }
+        .modal-content { background: white; margin: 25% auto; padding: 25px; border-radius: 25px; width: 85%; max-width: 350px; position: relative; text-align: center; }
+        .close-btn { position: absolute; right: 20px; top: 15px; font-size: 25px; cursor: pointer; color: #ccc; }
+
+        footer { text-align: center; padding: 25px; color: #aaa; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Abu Sufian IT Agency</h1>
+    <p>Premium Digital Services & Solutions</p>
+</header>
+
+<div class="container">
+    <div class="main-nav">
+        <button class="tab-btn active" onclick="showTab('home', this)">
+            <i class="fas fa-home"></i>
+            হোম
+        </button>
+        <button class="tab-btn" onclick="showTab('social', this)">
+            <i class="fas fa-share-nodes"></i>
+            সোশ্যাল
+        </button>
+        <button class="tab-btn" onclick="showTab('digital', this)">
+            <i class="fas fa-bolt"></i>
+            ডিজিটাল
+        </button>
+        <button class="tab-btn" onclick="showTab('projects', this)">
+            <i class="fas fa-globe"></i>
+            ওয়েবসাইট
+        </button>
+    </div>
+
+    <div id="home" class="content-section active">
+        <div class="intro-box">
+            <h2>আমাদের সম্পর্কে</h2>
+            <p>
+                স্বাগতম <b>Abu Sufian IT Agency</b>-তে।
+                প্রতিযোগিতামূলক ডিজিটাল বিশ্বে আপনার ব্যবসাকে এক ধাপ এগিয়ে নিতে আমরা প্রতিশ্রুতিবদ্ধ। আমরা বিশ্বাস করি, সঠিক ডিজিটাল টুলস এবং সোশ্যাল মিডিয়া স্ট্র্যাটেজি একটি সাধারণ উদ্যোগকে ব্র্যান্ডে পরিণত করতে পারে।<br>
+               <b>কেন আমাদের বেছে নেবেন?</b><br>
+            • ১০০% নিরাপদ ও অর্গানিক সার্ভিস।<br>
+            • বাজার সেরা সাশ্রয়ী মূল্য।<br>
+            • লাইফ-টাইম সাপোর্ট গ্যারান্টি।<br>
+              
+               আমাদের এজেন্সিতে আপনি পাবেন শতভাগ বিশ্বস্ততার সাথে ফেসবুক, ইউটিউব, এবং ইনস্টাগ্রাম বুস্টিং সার্ভিস। এছাড়াও আমরা জনপ্রিয় সব প্রিমিয়াম অ্যাপ সাবস্ক্রিপশন প্রদান করি অত্যন্ত সুলভ মূল্যে। এবং আমাদের ওয়েবসাইট প্রফেশনাল এবং হাই সিকিউরিটি সম্পন্ন। আপনারা আমাদের সকল ওয়েবসাইট ভিজিট করবেন। এবং আমাদের দক্ষ টিম প্রতিটি অর্ডার অত্যন্ত গুরুত্বের সাথে পর্যবেক্ষণ করে এবং দ্রুততম সময়ে ডেলিভারি নিশ্চিত করে।
+
+              আপনার ডিজিটাল যাত্রাকে সহজ এবং সফল করতে আমরা আছি আপনার পাশে। আমাদের ওপর আস্থা রাখার জন্য ধন্যবাদ।
+            </p>
+        </div>
+    </div>
+
+    <div id="social" class="content-section">
+        <div class="service-grid">
+            <div class="card">
+                <i class="fab fa-facebook" style="color:var(--fb); font-size: 32px;"></i>
+                <h4>Facebook</h4>
+                <button class="btn btn-sm" onclick="openModal('fb')">বিস্তারিত</button>
+                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+            </div>
+            <div class="card">
+                <i class="fab fa-instagram" style="color:var(--ig); font-size: 32px;"></i>
+                <h4>Instagram</h4>
+                <button class="btn btn-sm" onclick="openModal('ig')">বিস্তারিত</button>
+                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+            </div>
+            <div class="card">
+                <i class="fab fa-youtube" style="color:var(--yt); font-size: 32px;"></i>
+                <h4>YouTube</h4>
+                <button class="btn btn-sm" onclick="openModal('yt')">বিস্তারিত</button>
+                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+            </div>
+            <div class="card">
+                <i class="fab fa-telegram" style="color:var(--tg); font-size: 32px;"></i>
+                <h4>Telegram</h4>
+                <button class="btn btn-sm" onclick="openModal('tg')">বিস্তারিত</button>
+                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+            </div>
+            <div class="card">
+                <i class="fab fa-whatsapp" style="color:var(--wa); font-size: 32px;"></i>
+                <h4>WhatsApp</h4>
+                <button class="btn btn-sm" onclick="openModal('wa')">বিস্তারিত</button>
+                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+            </div>
+            <div class="card">
+                <i class="fab fa-tiktok" style="color:var(--tt); font-size: 32px;"></i>
+                <h4>TikTok</h4>
+                <button class="btn btn-sm" onclick="openModal('tk')">বিস্তারিত</button>
+                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="digital" class="content-section">
+        <div class="premium-list">
+            <div class="premium-item">YouTube Premium <i class="fas fa-chevron-right" onclick="openModal('app')"></i></div>
+            <div class="premium-item">Canva Pro <i class="fas fa-chevron-right" onclick="openModal('app')"></i></div>
+            <div class="premium-item">Capcut Premium <i class="fas fa-chevron-right" onclick="openModal('app')"></i></div>
+            <div class="premium-item">Telegram Premium <i class="fas fa-chevron-right" onclick="openModal('app')"></i></div>
+             <div class="premium-item">Vidmate Premium<i class="fas fa-chevron-right" onclick="openModal('app')"></i></div>
+              <div class="premium-item">Tiktok Premium <i class="fas fa-chevron-right" onclick="openModal('app')"></i></div>
+               <div class="premium-item">imo Premium <i class="fas fa-chevron-right" onclick="openModal('app')"></i></div>
+                <div class="premium-item">Remini Premium <i class="fas fa-chevron-right" onclick="openModal('app')"></i></div>
+                 <div class="premium-item">Kine master Premium <i class="fas fa-chevron-right" onclick="openModal('app')"></i></div>
+                   <div class="premium-item">Xrecoder Premium<i class="fas fa-chevron-right" onclick="openModal('app')"></i></div>
+        </div>
+            <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার করতে সরাসরি মেসেজ দিন</a>
+    </div>
+
+    <div id="projects" class="content-section">
+        <div class="project-list">
+            <div class="project-item"><i class="fas fa-shopping-cart" style="color:var(--accent)"></i> E-commerce Website</div>
+            <div class="project-item"><i class="fas fa-newspaper" style="color:var(--accent)"></i> Newspaper Website</div>
+            <div class="project-item"><i class="fas fa-user-tie" style="color:var(--accent)"></i> Portfolio Design</div>
+   
+       
+              <div class="project-item"><i class="fas fa-user-tie" style="color:var(--accent)"></i> Micro Job website</div>
+              <div class="project-item"><i class="fas fa-user-tie" style="color:var(--accent)"></i> Smm panel website</div>
+              <div class="project-item"><i class="fas fa-user-tie" style="color:var(--accent)"></i> Bloging Website</div>
+         <div class="project-item"><i class="fas fa-user-tie" style="color:var(--accent)"></i> Mining  Website</div>
+         <div class="project-item"><i class="fas fa-user-tie" style="color:var(--accent)"></i> Investment  Website</div>
+        </div>
+        <a href="https://t.me/Abu_Sufian_IT_Agency" class="btn btn-main">সব ওয়েবসাইট দেখুন</a>
+    </div>
+</div>
+
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3 id="modalTitle" style="color:var(--primary)">বিস্তারিত তথ্য</h3>
+        <p id="modalBody" style="color: #666; font-size: 14px; line-height: 1.6;"></p>
+        <button class="btn btn-main" onclick="closeModal()" style="margin-top: 15px;">Back</button>
+    </div>
+</div>
+
+<script>
+    function showTab(tabId, btn) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    const details = {
+    'fb': 'ফেসবুক পেজ বা প্রোফাইলে ১০০% রিয়েল এবং অর্গানিক ফলোয়ার, লাইক এবং ভিডিও ভিউ। আপনার বিজনেস গ্রোথ বাড়াতে আজই অর্ডার করুন।',
+    'ig': 'ইনস্টাগ্রাম টার্গেটেড ফলোয়ার, রিয়েল লাইক এবং রিলস ভিউ সার্ভিস। আমরা কোনো বট ব্যবহার করি না, সব সার্ভিস হাই কোয়ালিটি।',
+    'yt': 'ইউটিউব চ্যানেলে দ্রুত সাবস্ক্রাইবার এবং ৪০০০ ঘণ্টা ওয়াচটাইম সার্ভিস। মনিটাইজেশন গ্যারান্টি সহ নিরাপদ সার্ভিস।',
+    'tg': 'টেলিগ্রাম চ্যানেলে মেম্বার এবং পোস্ট ভিউ সার্ভিস। আপনার কমিউনিটি বড় করতে আমাদের দ্রুত ও কার্যকরী মেম্বার সার্ভিস নিন।',
+    'wa': 'হোয়াটসঅ্যাপ মার্কেটিং এবং চ্যানেল মেম্বার বৃদ্ধির সার্ভিস। সরাসরি টার্গেটেড অডিয়েন্সের কাছে মেসেজ পৌঁছে দিন।',
+    'tk': 'টিকটক ভিডিও ভাইরাল করতে রিয়েল ভিউ, লাইক এবং ফলোয়ার সার্ভিস। আপনার প্রোফাইলকে জনপ্রিয় করে তুলুন।',
+    'app': 'সব ধরনের প্রিমিয়াম অ্যাপ (Netflix, Spotify, Canva) সাবস্ক্রিপশন বাজারমূল্যের চেয়ে অনেক সাশ্রয়ী মূল্যে পান।'
+};
+
+    function openModal(key) {
+        document.getElementById('modalBody').innerText = details[key];
+        document.getElementById('infoModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('infoModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('infoModal')) closeModal();
+    }
+</script>
+
+</body>
+</html>
