@@ -6,6 +6,41 @@
     <title>Abu Sufian IT Agency | Professional Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+    /* লোগো স্টাইল */
+.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.logo-circle {
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
+    border: 2px solid var(--accent);
+    animation: pulse 2s infinite;
+}
+
+.logo-circle i {
+    font-size: 30px;
+    color: var(--primary);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px var(--accent); }
+    100% { transform: scale(1); }
+}
+
+header h1 {
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
         :root {
             --primary: #1a2a3a;
             --accent: #00d2ff;
@@ -19,34 +54,39 @@
             --premium: #f39c12;
         }
 
+   
         html, body { 
-            overflow: hidden; 
-            height: 100%; 
-            position: fixed; 
-            width: 100%; 
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif; 
-            background-color: #f0f2f5; 
-            margin: 0; 
-            padding: 0; 
-            color: #333; 
-            touch-action: none; 
-        }
+    overflow-x: hidden; /* ডানে-বামে স্ক্রল বন্ধ রাখবে */
+    overflow-y: auto;   /* উপরে-নিচে স্ক্রল চালু করবে */
+    height: auto;       /* হাইট কন্টেন্ট অনুযায়ী বাড়বে */
+    position: relative; /* ফিক্সড পজিশন সরিয়ে নরমাল করা হয়েছে */
+    width: 100%; 
+    margin: 0; 
+    padding: 0; 
+    touch-action: auto; /* টাচ স্ক্রিন ডিভাইসে স্ক্রল কাজ করবে */
+}
 
         header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 45px 20px; text-align: center; border-bottom: 4px solid var(--accent); }
         header h1 { margin: 0; font-size: 1.5rem; letter-spacing: 1px; text-transform: uppercase; }
         header p { margin: 5px 0 0; opacity: 0.8; font-size: 0.85rem; }
 
+
         .container { 
-            max-width: 600px; 
-            margin: 0 auto; 
-            padding: 20px 15px; 
-            height: calc(100vh - 150px); 
-            overflow-y: auto; 
-            box-sizing: border-box;
-            touch-action: pan-y; 
-        }
+    max-width: 600px; 
+    margin: 0 auto; 
+    padding: 20px 15px; 
+    height: auto; /* এই লাইনটি নিশ্চিত করুন */
+    min-height: 100vh; /* পেজ ছোট হলেও যেন পুরো স্ক্রিন জুড়ে থাকে */
+    overflow-y: visible; 
+    box-sizing: border-box;
+}
 
         .main-nav { 
+          .main-nav {
+    position: sticky;
+    top: 10px;
+    z-index: 1000;
+}
             display: flex; 
             justify-content: center; 
             gap: 8px; 
@@ -116,11 +156,16 @@
     </style>
 </head>
 <body>
-
 <header>
+    <div class="logo-wrapper">
+        <div class="logo-circle">
+            <i class="fas fa-microchip"></i>
+        </div>
+    </div>
     <h1>Abu Sufian IT Agency</h1>
     <p>Premium Digital Services & Solutions</p>
 </header>
+
 
 <div class="container">
     <div class="main-nav">
@@ -166,37 +211,37 @@
                 <i class="fab fa-facebook" style="color:var(--fb); font-size: 32px;"></i>
                 <h4>Facebook</h4>
                 <button class="btn btn-sm" onclick="openModal('fb')">বিস্তারিত দেখুন</button>
-                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+                <a href="https://www.facebook.com/share/1DeM4kRz2C/" class="btn btn-main">অর্ডার দিন</a>
             </div>
             <div class="card">
                 <i class="fab fa-instagram" style="color:var(--ig); font-size: 32px;"></i>
                 <h4>Instagram</h4>
                 <button class="btn btn-sm" onclick="openModal('ig')">বিস্তারিত দেখুন</button>
-                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+                <a href="https://www.facebook.com/share/1DeM4kRz2C/" class="btn btn-main">অর্ডার দিন</a>
             </div>
             <div class="card">
                 <i class="fab fa-youtube" style="color:var(--yt); font-size: 32px;"></i>
                 <h4>YouTube</h4>
                 <button class="btn btn-sm" onclick="openModal('yt')">বিস্তারিত দেখুন</button>
-                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+                <a href="https://www.facebook.com/share/1DeM4kRz2C/" class="btn btn-main">অর্ডার দিন</a>
             </div>
             <div class="card">
                 <i class="fab fa-telegram" style="color:var(--tg); font-size: 32px;"></i>
                 <h4>Telegram</h4>
                 <button class="btn btn-sm" onclick="openModal('tg')">বিস্তারিত দেখুন</button>
-                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+                <a href="https://www.facebook.com/share/1DeM4kRz2C/" class="btn btn-main">অর্ডার দিন</a>
             </div>
             <div class="card">
                 <i class="fab fa-whatsapp" style="color:var(--wa); font-size: 32px;"></i>
                 <h4>WhatsApp</h4>
                 <button class="btn btn-sm" onclick="openModal('wa')">বিস্তারিত দেখুন</button>
-                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+                <a href="https://www.facebook.com/share/1DeM4kRz2C/" class="btn btn-main">অর্ডার দিন</a>
             </div>
             <div class="card">
                 <i class="fab fa-tiktok" style="color:var(--tt); font-size: 32px;"></i>
                 <h4>TikTok</h4>
                 <button class="btn btn-sm" onclick="openModal('tk')">বিস্তারিত দেখুন</button>
-                <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main">অর্ডার দিন</a>
+                <a href="https://www.facebook.com/share/1DeM4kRz2C/" class="btn btn-main">অর্ডার দিন</a>
             </div>
         </div>
     </div>
@@ -244,7 +289,7 @@
             <i class="fas fa-chevron-right"></i>
         </div>
     </div>
-    <a href="https://t.me/Abu_Sufian_2026" class="btn btn-main" style="margin-top: 20px;">অর্ডার করতে সরাসরি মেসেজ দিন</a>
+    <a href="https://m.me/your_fb_username" class="btn btn-main" style="margin-top: 20px;">অর্ডার করতে সরাসরি মেসেজ দিন</a>
 </div>
         
 
@@ -283,12 +328,12 @@
     }
 
     const details = {
-    'fb': 'ফেসবুক পেজ বা প্রোফাইলে ১০০% রিয়েল এবং অর্গানিক ফলোয়ার, লাইক এবং ভিডিও ভিউ। আপনার বিজনেস গ্রোথ বাড়াতে আজই অর্ডার করুন। 1k ফলোয়ারের মুল্য 70.00 টাকা',
+    'fb': 'ফেসবুক পেজ বা প্রোফাইলে ১০০% রিয়েল এবং অর্গানিক ফলোয়ার, লাইক এবং ভিডিও ভিউ। আপনার বিজনেস গ্রোথ বাড়াতে আজই অর্ডার করন। 1k ফলোয়ারের মুল্য 70.00 টাকা',
     'ig': 'ইনস্টাগ্রাম টার্গেটেড ফলোয়ার, রিয়েল লাইক এবং রিলস ভিউ সার্ভিস। আমরা কোনো বট ব্যবহার করি না, সব সার্ভিস হাই কোয়ালিটি। 1k ফলোয়ারের মুল্য 150.00 টাকা',
     'yt': 'ইউটিউব চ্যানেলে দ্রুত সাবস্ক্রাইবার এবং ৪০০০ ঘণ্টা ওয়াচটাইম সার্ভিস। মনিটাইজেশন গ্যারান্টি সহ নিরাপদ সার্ভিস। 1k সাব্সক্রাইবার মুল্য 1300.00 টাকা',
     'tg': 'টেলিগ্রাম চ্যানেলে মেম্বার এবং পোস্ট ভিউ সার্ভিস। আপনার কমিউনিটি বড় করতে আমাদের দ্রুত ও কার্যকরী মেম্বার সার্ভিস নিন। 1k সাব্সক্রাইবার মুল্য 120.00 টাকা',
     'wa': 'হোয়াটসঅ্যাপ মার্কেটিং এবং চ্যানেল মেম্বার বৃদ্ধির সার্ভিস। সরাসরি টার্গেটেড অডিয়েন্সের কাছে মেসেজ পৌঁছে দিন। 1k ফলোয়ারের মুল্য 170.00 টাকা',
-    'tk': 'টিকটক ভিডিও ভাইরাল করতে রিয়েল ভিউ, লাইক এবং ফলোয়ার সার্ভিস। আপনার প্রোফাইলকে জনপ্রিয় করে তুলুন। 1k ফলোয়ারের মুল্য 100.00 টাকা',
+    'tk': 'টিকটক ভিডিও ভাইরাল করতে রিয়েল ভিউ, লাইক এবং ফলোয়ার সার্ভিস। আপনার প্রোফাইলকে জনপ্রিয় করে তুলুন। 1k ফলোয়ারের মুল্য 150.00 টাকা',
     'app': 'সব ধরনের প্রিমিয়াম অ্যাপ (YouTube, Telegram , Canva) সাবস্ক্রিপশন বাজারমূল্যের চেয়ে অনেক সাশ্রয়ী মূল্যে পাবেন। যেকোন ১ টা কিনলে মুল্য থাকবে 50.00 টাকা। আর ১০ টা প্রিমিয়াম এপস কিনলে মুল্য থাকবে মাএ 300.00 টাকা'
 };
 
