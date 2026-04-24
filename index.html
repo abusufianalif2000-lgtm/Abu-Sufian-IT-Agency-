@@ -7,129 +7,108 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#00ffa3">
+    <meta name="theme-color" content="#00ffa3">
     <style>
         :root {
             --primary: #00ffa3;
             --secondary: #00d4ff;
             --bg-dark: #05070a;
             --glass: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.07);
-            --neon-glow: 0 0 30px rgba(0, 255, 163, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --neon-glow: 0 0 25px rgba(0, 255, 163, 0.2);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', 'Hind Siliguri', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--bg-dark); color: #fff; overflow-x: hidden; }
+        body { background: var(--bg-dark); color: var(--text-main); overflow-x: hidden; line-height: 1.5; }
 
-        /* Animated Background */
-        .bg-shapes { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; opacity: 0.4; }
-        .shape { position: absolute; border-radius: 50%; filter: blur(80px); }
-        .shape-1 { width: 300px; height: 300px; background: var(--primary); top: -100px; right: -50px; }
-        .shape-2 { width: 250px; height: 250px; background: var(--secondary); bottom: -50px; left: -50px; }
+        /* Smooth Background Elements */
+        .bg-shapes { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .shape { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; }
+        .shape-1 { width: 350px; height: 350px; background: var(--primary); top: -150px; right: -50px; }
+        .shape-2 { width: 300px; height: 300px; background: var(--secondary); bottom: -100px; left: -50px; }
 
-        /* Premium Navigation */
+        /* Professional Navigation */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 20px; sticky; top: 0; z-index: 1000;
-            background: rgba(5, 7, 10, 0.8); backdrop-filter: blur(15px);
+            padding: 15px 20px; position: sticky; top: 0; z-index: 1000;
+            background: rgba(5, 7, 10, 0.85); backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
         }
-        .brand { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px; }
-        .brand i { color: var(--primary); font-size: 1.4rem; }
+        .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; }
+        .brand i { color: var(--primary); text-shadow: var(--neon-glow); }
         
-        .call-action {
-            display: flex; align-items: center; gap: 10px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 6px 14px; border-radius: 50px; text-decoration: none;
-            color: #000; font-weight: 700; font-size: 0.85rem; transition: 0.3s;
-        }
+        .nav-actions { display: flex; gap: 12px; }
+        .nav-btn { width: 42px; height: 42px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--primary); transition: 0.3s; cursor: pointer; text-decoration: none; }
+        .nav-btn:active { transform: scale(0.9); background: rgba(255,255,255,0.1); }
+        .call-btn { background: var(--primary); color: #000; border: none; box-shadow: var(--neon-glow); }
 
         /* Hero Section */
-        .hero { padding: 40px 20px 20px; text-align: center; }
-        .badge { background: var(--glass); border: 1px solid var(--glass-border); padding: 5px 15px; border-radius: 50px; font-size: 0.7rem; color: var(--primary); display: inline-block; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
-        .hero h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.1; margin-bottom: 12px; }
+        .hero { padding: 50px 20px 30px; text-align: center; }
+        .badge { background: rgba(0, 255, 163, 0.1); border: 1px solid rgba(0, 255, 163, 0.2); padding: 6px 16px; border-radius: 50px; font-size: 0.75rem; color: var(--primary); display: inline-block; margin-bottom: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .hero h1 { font-size: 2.6rem; font-weight: 800; line-height: 1.1; margin-bottom: 15px; letter-spacing: -1px; }
         .hero span { background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--text-dim); font-size: 0.95rem; max-width: 80%; margin: 0 auto; }
 
-        .container { max-width: 500px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 500px; margin: 0 auto; padding: 0 20px 40px; }
 
-        /* Modern Grid */
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .card {
-            background: var(--glass); border: 1px solid var(--glass-border);
-            padding: 25px 15px; border-radius: 24px; text-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative; overflow: hidden;
+        /* Service Cards Grid */
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 10px; }
+        .card { 
+            background: var(--glass); border: 1px solid var(--glass-border); 
+            padding: 30px 20px; border-radius: 28px; text-align: center; 
+            transition: all 0.4s ease; cursor: pointer;
         }
-        .card:active { transform: scale(0.95); background: rgba(255,255,255,0.06); }
-        .card i { font-size: 2.2rem; margin-bottom: 12px; display: block; }
-        .card h3 { font-size: 0.9rem; font-weight: 500; color: #cbd5e1; }
-        
+        .card:active { transform: scale(0.96); background: rgba(255,255,255,0.08); border-color: var(--primary); }
+        .card i { font-size: 2.5rem; margin-bottom: 15px; display: block; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); }
+        .card h3 { font-size: 1rem; font-weight: 600; color: #e2e8f0; }
+
         /* Stats Box */
-        .stats { background: linear-gradient(to right, var(--glass), transparent); border-radius: 20px; padding: 15px; margin-top: 30px; display: flex; justify-content: space-around; border: 1px solid var(--glass-border); }
-        .stat-item { text-align: center; }
-        .stat-item b { display: block; font-size: 1.1rem; color: var(--primary); }
-        .stat-item small { font-size: 0.65rem; color: var(--text-dim); }
+        .stats { background: var(--glass); border-radius: 24px; padding: 20px; margin-top: 35px; display: flex; justify-content: space-around; border: 1px solid var(--glass-border); backdrop-filter: blur(10px); }
+        .stat-item b { display: block; font-size: 1.2rem; color: var(--primary); font-weight: 800; }
+        .stat-item small { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
 
-        /* Service Page & List */
-        .page { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 2000; overflow-y: auto; padding-bottom: 50px; }
-        .page-head { padding: 25px 20px; display: flex; align-items: center; gap: 15px; }
-        .back-btn { width: 45px; height: 45px; background: var(--glass); border-radius: 15px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--glass-border); }
+        /* Full Page View */
+        .page { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 2000; overflow-y: auto; animation: slideUp 0.4s ease; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
-        .service-card {
-            background: var(--glass); margin: 0 20px 12px; padding: 18px; 
-            border-radius: 20px; border: 1px solid var(--glass-border);
-            display: flex; justify-content: space-between; align-items: center;
+        .page-head { padding: 25px 20px; display: flex; align-items: center; gap: 15px; sticky; top: 0; background: var(--bg-dark); z-index: 10; border-bottom: 1px solid var(--glass-border); }
+        .service-list { padding: 20px; }
+        .service-card { 
+            background: var(--glass); margin-bottom: 15px; padding: 20px; 
+            border-radius: 24px; border: 1px solid var(--glass-border); 
+            display: flex; justify-content: space-between; align-items: center; 
         }
-        .service-card h4 { font-size: 0.9rem; margin-bottom: 4px; font-weight: 500; }
-        .service-card b { color: var(--primary); font-size: 0.95rem; }
-        .order-btn { background: var(--primary); color: #000; border: none; padding: 10px 18px; border-radius: 12px; font-weight: 800; font-size: 0.75rem; box-shadow: var(--neon-glow); }
+        .service-info h4 { font-size: 1rem; margin-bottom: 5px; color: #fff; }
+        .service-info b { color: var(--primary); font-size: 0.9rem; background: rgba(0,255,163,0.1); padding: 4px 10px; border-radius: 8px; }
+        .order-btn { background: var(--primary); color: #000; border: none; padding: 12px 20px; border-radius: 14px; font-weight: 800; font-size: 0.8rem; cursor: pointer; box-shadow: var(--neon-glow); }
 
-        /* Modal Styles */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; align-items: flex-end; }
-        .modal-content { background: #0c1016; width: 100%; border-radius: 35px 35px 0 0; padding: 30px 25px; border-top: 2px solid var(--primary); max-height: 90vh; overflow-y: auto; }
+        /* Bottom Modal Styling */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 3000; align-items: flex-end; }
+        .modal-content { 
+            background: #0f172a; width: 100%; border-radius: 40px 40px 0 0; 
+            padding: 35px 25px 50px; border-top: 3px solid var(--primary); 
+            max-height: 92vh; overflow-y: auto; 
+        }
         
-        input, select { width: 100%; padding: 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--glass-border); border-radius: 16px; color: #fff; margin-top: 8px; outline: none; font-size: 0.9rem; }
+        label { font-size: 0.8rem; color: var(--text-dim); margin-top: 18px; display: block; font-weight: 600; margin-left: 5px; }
+        input, select { width: 100%; padding: 16px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 18px; color: #fff; margin-top: 8px; outline: none; transition: 0.3s; font-size: 1rem; }
         input:focus { border-color: var(--primary); background: rgba(0,255,163,0.05); }
-        label { font-size: 0.75rem; color: #94a3b8; margin-top: 15px; display: block; font-weight: 500; margin-left: 5px; }
 
-        .confirm-btn { width: 100%; background: var(--primary); color: #000; border: none; padding: 18px; border-radius: 20px; font-weight: 800; margin-top: 25px; font-size: 1rem; box-shadow: var(--neon-glow); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .price-display { background: linear-gradient(135deg, rgba(0,255,163,0.2), transparent); padding: 15px; border-radius: 20px; border: 1px solid rgba(0,255,163,0.3); text-align: center; margin-top: 10px; }
+        .price-display span { font-size: 0.75rem; color: var(--text-dim); display: block; }
+        .price-display b { font-size: 1.5rem; color: var(--primary); font-weight: 800; }
 
-        .spinner { width: 22px; height: 22px; border: 3px solid rgba(0,0,0,0.1); border-top: 3px solid #000; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        .payment-box { background: #000; padding: 20px; border-radius: 24px; margin-top: 25px; border: 1px solid var(--glass-border); }
+        .num-copy { display: flex; justify-content: space-between; align-items: center; background: #1e293b; padding: 12px 15px; border-radius: 15px; margin-top: 10px; }
+
+        .confirm-btn { width: 100%; background: var(--primary); color: #000; border: none; padding: 20px; border-radius: 20px; font-weight: 800; margin-top: 30px; font-size: 1.1rem; box-shadow: var(--neon-glow); cursor: pointer; }
+
+        footer { text-align: center; padding: 40px 20px; color: #475569; font-size: 11px; font-weight: 600; letter-spacing: 1px; }
+
+        .spinner { width: 24px; height: 24px; border: 4px solid rgba(0,0,0,0.1); border-top: 4px solid #000; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        /* Success Card */
-        #success-view { text-align: center; display: none; }
-        .receipt { background: #000; padding: 20px; border-radius: 24px; text-align: left; margin: 25px 0; border: 1px solid var(--glass-border); position: relative; }
-        .receipt::before { content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; background: var(--glass-border); border-radius: 10px; }
-        .receipt-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.8rem; color: #94a3b8; }
-        .receipt-row span:last-child { color: var(--primary); font-weight: 600; }
-
-        footer { text-align: center; padding: 40px 20px; color: #334155; font-size: 10px; letter-spacing: 1px; }
-        .nav-icon-btn {
-    width: 40px;
-    height: 40px;
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-    text-decoration: none;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.nav-icon-btn:active {
-    transform: scale(0.9);
-}
-
-.call-btn {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: #000;
-    border: none;
-    box-shadow: var(--neon-glow);
-}
     </style>
 </head>
 <body>
@@ -140,214 +119,292 @@
 </div>
 
 <nav>
-    <div class="brand"><i class="fas fa-atom"></i> SUFIAN IT</div>
-    <div style="display: flex; gap: 10px; align-items: center;">
-        <button id="installApp" class="nav-icon-btn" style="display: none;">
-            <i class="fas fa-download"></i>
-        </button>
-
-        <a href="tel:09638307653" class="nav-icon-btn call-btn">
-            <i class="fas fa-phone-alt"></i>
-        </a>
+    <div class="brand"><i class="fas fa-bolt"></i> SUFIAN IT</div>
+    <div class="nav-actions">
+        <button id="installApp" class="nav-btn" style="display: none;"><i class="fas fa-download"></i></button>
+        <a href="tel:09638307653" class="nav-btn call-btn"><i class="fas fa-phone-alt"></i></a>
     </div>
 </nav>
+
 <div id="home-view">
     <div class="hero">
-        <div class="badge">Trusted by 1k+ Clients</div>
+        <div class="badge">🔥 Premier Agency</div>
         <h1>Boost Your <span>Digital</span> Presence</h1>
-        <p style="color: #64748b; font-size: 0.85rem; line-height: 1.6;">প্রিমিয়াম কোয়ালিটি সোশ্যাল মিডিয়া সার্ভিস এখন আপনার হাতের মুঠোয়।</p>
+        <p>বেস্ট কোয়ালিটি সোশ্যাল মিডিয়া সার্ভিস এখন আরও দ্রুত এবং সাশ্রয়ী মূল্যে।</p>
     </div>
 
     <div class="container">
         <div class="grid">
-            <div class="card" onclick="openPage('fb')">
-                <i class="fab fa-facebook" style="color: #1877F2;"></i>
-                <h3>Facebook</h3>
-            </div>
-            <div class="card" onclick="openPage('yt')">
-                <i class="fab fa-youtube" style="color: #FF0000;"></i>
-                <h3>YouTube</h3>
-            </div>
-            <div class="card" onclick="openPage('tg')">
-                <i class="fab fa-telegram" style="color: #0088cc;"></i>
-                <h3>Telegram</h3>
-            </div>
-            <div class="card" onclick="openPage('ig')">
-                <i class="fab fa-instagram" style="color: #E1306C;"></i>
-                <h3>Instagram</h3>
-            </div>
+            <div class="card" onclick="openPage('fb')"><i class="fab fa-facebook" style="color: #1877F2;"></i><h3>Facebook</h3></div>
+            <div class="card" onclick="openPage('yt')"><i class="fab fa-youtube" style="color: #FF0000;"></i><h3>YouTube</h3></div>
+            <div class="card" onclick="openPage('tg')"><i class="fab fa-telegram" style="color: #0088cc;"></i><h3>Telegram</h3></div>
+            <div class="card" onclick="openPage('ig')"><i class="fab fa-instagram" style="color: #E1306C;"></i><h3>Instagram</h3></div>
         </div>
-
         <div class="stats">
-            <div class="stat-item"><b>1.2k+</b><small>Orders</small></div>
-            <div class="stat-item"><b>100%</b><small>Secure</small></div>
-            <div class="stat-item"><b>24/7</b><small>Active</small></div>
+            <div class="stat-item"><b>1.5k+</b><small>Orders</small></div>
+            <div class="stat-item"><b>100%</b><small>Safe</small></div>
+            <div class="stat-item"><b>24/7</b><small>Support</small></div>
         </div>
-
-        <footer>© 2026 ABU SUFIAN IT AGENCY • PREMIUM QUALITY</footer>
+        <footer>© 2026 ABU SUFIAN IT AGENCY</footer>
     </div>
 </div>
 
 <div id="service-page" class="page">
     <div class="page-head">
-        <div class="back-btn" onclick="closePage()"><i class="fas fa-arrow-left"></i></div>
-        <h2 id="display-title" style="font-size: 1.3rem;">Services</h2>
+        <div class="nav-btn" onclick="closePage()"><i class="fas fa-arrow-left"></i></div>
+        <h2 id="display-title">Services</h2>
     </div>
-    <div id="service-container"></div>
+    <div id="service-container" class="service-list"></div>
 </div>
 
 <div id="orderModal" class="modal">
     <div class="modal-content">
         <div id="form-view">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                <h3 style="color:var(--primary);">Order Details</h3>
-                <i class="fas fa-times" onclick="closeModal()" style="color:#475569;"></i>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3 style="color:var(--primary); font-size: 1.4rem;">Order Checkout</h3>
+                <i class="fas fa-times" onclick="closeModal()" style="color:#64748b; font-size: 1.5rem; cursor:pointer;"></i>
             </div>
             
-            <div style="background: rgba(0,255,163,0.05); padding: 15px; border-radius: 20px; border: 1px solid rgba(0,255,163,0.1); margin-bottom: 20px;">
-                <p id="selected-service" style="color: var(--primary); font-weight: 700; font-size: 0.9rem;"></p>
-            </div>
-<div style="background: linear-gradient(145deg, rgba(0, 255, 163, 0.05), rgba(0, 0, 0, 0.5)); padding: 20px; border-radius: 24px; margin-bottom: 25px; border: 1px solid rgba(0, 255, 163, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; overflow: hidden;">
-    
-    <div style="position: absolute; top: -20px; right: -20px; width: 60px; height: 60px; background: var(--primary); filter: blur(40px); opacity: 0.2;"></div>
-
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
-        <div>
-            <p style="color: #94a3b8; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Payment Method</p>
-            <div style="display: flex; gap: 8px; align-items: center;">
-                <span style="background: #e2136e; color: #fff; padding: 2px 8px; border-radius: 6px; font-size: 0.6rem; font-weight: 800;">bkash</span>
-                <span style="background: #f34d23; color: #fff; padding: 2px 8px; border-radius: 6px; font-size: 0.6rem; font-weight: 800;">Nagad</span>
-                <small style="color: var(--primary); font-size: 0.65rem; font-weight: 600;">(Personal)</small>
-            </div>
-        </div>
-        <i class="fas fa-shield-check" style="color: var(--primary); opacity: 0.8;"></i>
-    </div>
-
-    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 12px 16px; border-radius: 16px; border: 1px solid var(--glass-border);">
-        <div style="display: flex; flex-direction: column;">
-            <span style="color: #64748b; font-size: 0.6rem; font-weight: 600;">CLICK TO COPY</span>
-            <b id="targetNum" style="color: #fff; font-size: 1.2rem; letter-spacing: 1.5px; font-family: 'Outfit', sans-serif;">01868293471</b>
-        </div>
-        <button onclick="copyNum()" style="background: var(--primary); color: #000; border: none; width: 40px; height: 40px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; box-shadow: 0 4px 12px rgba(0, 255, 163, 0.3);">
-            <i class="fas fa-copy" style="font-size: 1rem;"></i>
-        </button>
-    </div>
-
-    <p style="color: #ffcc00; font-size: 0.65rem; margin-top: 12px; text-align: center; opacity: 0.8;">
-        <i class="fas fa-info-circle"></i> সেন্ড মানি করার পর ট্রানজেকশন আইডি নিচে দিন
-    </p>
-</div>
-
+            <p id="selected-service" style="color: #fff; margin-top: 10px; font-weight: 500; opacity: 0.8;"></p>
 
             <form id="tg-form">
                 <input type="hidden" id="service_name">
-                <label>Service Link</label>
-                <input type="url" id="user_link" placeholder="https://..." required>
+                <input type="hidden" id="base_price">
+
+                <label>Target URL / Link</label>
+                <input type="url" id="user_link" placeholder="এখনে লিংক পেস্ট করুন..." required>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                     <div>
-                        <label>Method</label>
+                        <label>Select Amount</label>
+                        <select id="order_qty" onchange="updateTotalPrice()">
+                            <option value="1000">1,000 (1k)</option>
+                            <option value="2000">2,000 (2k)</option>
+                            <option value="3000">3,000 (3k)</option>
+                            <option value="5000">5,000 (5k)</option>
+                            <option value="10000">10,000 (10k)</option>
+                        </select>
+                    </div>
+                    <div class="price-display">
+                        <span>Total Payable</span>
+                        <b id="total_price_display">0৳</b>
+                    </div>
+                </div>
+
+<style>
+    .payment-box {
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.4));
+        padding: 20px;
+        border-radius: 24px;
+        margin-top: 25px;
+        border: 1px solid rgba(0, 255, 163, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .payment-box::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(0, 255, 163, 0.05) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .payment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .payment-method-icons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .method-tag {
+        font-size: 0.6rem;
+        font-weight: 800;
+        padding: 3px 8px;
+        border-radius: 6px;
+        text-transform: uppercase;
+        color: #fff;
+    }
+
+    .bkash { background: #e2136e; }
+    .nagad { background: #f34d23; }
+
+    .instruction-text {
+        font-size: 0.85rem;
+        color: #cbd5e1;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .num-copy-wrapper {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid var(--glass-border);
+        padding: 12px 16px;
+        border-radius: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: 0.3s;
+    }
+
+    .num-copy-wrapper:hover {
+        border-color: var(--primary);
+    }
+
+    .number-info span {
+        display: block;
+        font-size: 0.6rem;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .number-info b {
+        font-size: 1.3rem;
+        color: #fff;
+        letter-spacing: 1.5px;
+        font-family: 'Outfit', sans-serif;
+    }
+
+    .copy-btn {
+        background: var(--primary);
+        color: #000;
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s;
+        box-shadow: 0 4px 15px rgba(0, 255, 163, 0.3);
+    }
+
+    .copy-btn:active {
+        transform: scale(0.9);
+    }
+
+    .alert-note {
+        background: rgba(255, 204, 0, 0.1);
+        color: #ffcc00;
+        padding: 8px 12px;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(255, 204, 0, 0.2);
+    }
+</style>
+
+<div class="payment-box">
+    <div class="payment-header">
+        <div class="payment-method-icons">
+            <span class="method-tag bkash">bKash</span>
+            <span class="method-tag nagad">Nagad</span>
+        </div>
+        <i class="fas fa-shield-check" style="color: var(--primary); font-size: 1.1rem;"></i>
+    </div>
+
+    <div class="instruction-text">
+        <i class="fas fa-arrow-right-to-bracket" style="color: var(--primary); font-size: 0.8rem;"></i>
+        <span>বিকাশ বা নগদে <b>Send Money</b> করুন (Personal)</span>
+    </div>
+
+    <div class="num-copy-wrapper">
+        <div class="number-info">
+            <span>Official Number</span>
+            <b id="targetNum">01868293471</b>
+        </div>
+        <button type="button" onclick="copyNum()" class="copy-btn">
+            <i class="fas fa-copy"></i>
+        </button>
+    </div>
+
+    <div class="alert-note">
+        <i class="fas fa-circle-exclamation"></i>
+        <span>টাকা পাঠানোর পর ট্রানজেকশন আইডি (TrxID) নিচে দিন।</span>
+    </div>
+</div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <label>Payment Method</label>
                         <select id="pay_method"><option>Bkash</option><option>Nagad</option></select>
                     </div>
                     <div>
                         <label>Your Number</label>
-                        <input type="tel" id="sender_num" placeholder="01XXXXXXX" required>
+                        <input type="tel" id="sender_num" placeholder="017xxxxxxxx" required>
                     </div>
                 </div>
 
                 <label>Transaction ID (TrxID)</label>
-                <input type="text" id="trx_id" placeholder="8N77XCW..." required>
+                <input type="text" id="trx_id" placeholder="Transaction ID এখানে দিন" required>
 
-                <button type="submit" class="confirm-btn">Confirm Order</button>
+                <button type="submit" class="confirm-btn">Place Order Now</button>
             </form>
         </div>
 
-        <div id="success-view">
-            <i class="fas fa-check-circle" style="font-size: 4.5rem; color: var(--primary);"></i>
-            <h2 style="margin-top: 15px;">Order Success!</h2>
-            <p style="color: #64748b; font-size: 0.8rem;">অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে।</p>
-            
-            <div class="receipt">
-                <div class="receipt-row"><span>Service:</span><span id="res-service"></span></div>
-                <div class="receipt-row"><span>Method:</span><span id="res-method"></span></div>
-                <div class="receipt-row"><span>Number:</span><span id="res-number"></span></div>
-                <div class="receipt-row"><span>TrxID:</span><span id="res-trx"></span></div>
-                <div class="receipt-row"><span>Time:</span><span id="res-time"></span></div>
-            </div>
-            
-            <button class="confirm-btn" onclick="closeModal()">Done</button>
+        <div id="success-view" style="text-align: center; display: none; padding: 40px 0;">
+            <i class="fas fa-check-circle" style="font-size: 5rem; color: var(--primary); filter: drop-shadow(0 0 15px var(--primary));"></i>
+            <h2 style="margin-top: 20px; font-size: 1.8rem;">Order Confirmed!</h2>
+            <p style="color: var(--text-dim); margin-top: 10px;">অর্ডারটি সফলভাবে সাবমিট হয়েছে। কিছুক্ষণের মধ্যেই কাজ শুরু হবে।</p>
+            <button class="confirm-btn" onclick="closeModal()">Back to Home</button>
         </div>
     </div>
 </div>
+
 <script>
-    // --- configuration ---
+    // --- Configuration ---
     const BOT_TOKEN = "8654773843:AAELWmXfWsNg2_XS5C0UcoFIAWxJt-40RZM"; 
     const CHAT_ID = "6882504862";
 
     const allServices = {
         'fb': { title: 'Facebook Growth', list: [
-            { name: 'Profile Followers', price: '70৳/1k' },
-            { name: 'Page Followers', price: '75৳/1k' },
-            { name: 'Post Likes', price: '30৳/1k' },
-            { name: 'Video Views', price: '40৳/1k' }
+            { name: 'Profile Followers', price: 70 },
+            { name: 'Page Followers', price: 75 },
+            { name: 'Post Likes', price: 30 },
+            { name: 'Video Views', price: 40 }
         ]},
         'yt': { title: 'YouTube Boost', list: [
-            { name: 'Subscribers', price: '1300৳/1k' },
-            { name: 'Watch Time', price: '2500৳' }
+            { name: 'Subscribers', price: 1300 },
+            { name: 'Watch Time', price: 2500 }
         ]},
         'tg': { title: 'Telegram Growth', list: [
-            { name: 'Channel Members', price: '120৳/1k' },
-            { name: 'Post Views', price: '10৳/1k' }
+            { name: 'Channel Members', price: 120 },
+            { name: 'Post Views', price: 10 }
         ]},
         'ig': { title: 'Instagram Growth', list: [
-            { name: 'Followers', price: '150৳/1k' },
-            { name: 'Likes', price: '50৳/1k' }
+            { name: 'Followers', price: 150 },
+            { name: 'Likes', price: 50 }
         ] }
     };
 
-    // --- PWA Install Logic ---
-    let deferredPrompt;
-    const installBtn = document.getElementById('installApp');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        if(installBtn) installBtn.style.display = 'flex'; // ইনস্টল বাটন দেখাবে
-    });
-
-    if(installBtn) {
-        installBtn.addEventListener('click', () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('App Installed');
-                    }
-                    deferredPrompt = null;
-                    installBtn.style.display = 'none';
-                });
-            }
-        });
-    }
-
-    // --- Service Worker Registration ---
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js')
-                .then(reg => console.log('SW Registered'))
-                .catch(err => console.log('SW Error', err));
-        });
-    }
-
-    // --- Navigation & UI Logic ---
+    // --- UI Logic ---
     function openPage(key) {
         const data = allServices[key];
         document.getElementById('display-title').innerText = data.title;
         let html = '';
         data.list.forEach(item => {
-            html += `<div class="service-card">
-                <div><h4>${item.name}</h4><b>${item.price}</b></div>
-                <button class="order-btn" onclick="openOrder('${item.name} (${item.price})')">Buy Now</button>
+            html += `
+            <div class="service-card">
+                <div class="service-info">
+                    <h4>${item.name}</h4>
+                    <b>${item.price}৳ per 1k</b>
+                </div>
+                <button class="order-btn" onclick="openOrder('${item.name}', ${item.price})">Buy Now</button>
             </div>`;
         });
         document.getElementById('service-container').innerHTML = html;
@@ -356,12 +413,21 @@
 
     function closePage() { document.getElementById('service-page').style.display = 'none'; }
 
-    function openOrder(service) {
-        document.getElementById('selected-service').innerText = service;
-        document.getElementById('service_name').value = service;
+    function openOrder(name, price) {
+        document.getElementById('selected-service').innerText = `Service: ${name}`;
+        document.getElementById('service_name').value = name;
+        document.getElementById('base_price').value = price;
+        updateTotalPrice();
         document.getElementById('orderModal').style.display = 'flex';
         document.getElementById('form-view').style.display = 'block';
         document.getElementById('success-view').style.display = 'none';
+    }
+
+    function updateTotalPrice() {
+        const base = parseInt(document.getElementById('base_price').value) || 0;
+        const qty = parseInt(document.getElementById('order_qty').value) || 1000;
+        const total = (qty / 1000) * base;
+        document.getElementById('total_price_display').innerText = total + "৳";
     }
 
     function closeModal() { document.getElementById('orderModal').style.display = 'none'; }
@@ -371,16 +437,18 @@
         alert("Number Copied!");
     }
 
-    // --- Telegram Order Submission ---
+    // --- Telegram Logic ---
     document.getElementById('tg-form').addEventListener('submit', function(e) {
         e.preventDefault();
-        const btn = e.target.querySelector('button');
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '<div class="spinner"></div>';
+        const btn = e.target.querySelector('.confirm-btn');
+        const oldText = btn.innerHTML;
+        btn.innerHTML = '<div class="spinner" style="margin:0 auto;"></div>';
         btn.disabled = true;
 
-        const data = {
+        const orderData = {
             service: document.getElementById('service_name').value,
+            qty: document.getElementById('order_qty').value,
+            total: document.getElementById('total_price_display').innerText,
             link: document.getElementById('user_link').value,
             method: document.getElementById('pay_method').value,
             sender: document.getElementById('sender_num').value,
@@ -388,34 +456,32 @@
             time: new Date().toLocaleString('bn-BD')
         };
 
-        const message = `🚀 *NEW ORDER RECEIVED*\n\n` +
-                        `📦 *Service:* ${data.service}\n` +
-                        `🔗 *Link:* ${data.link}\n` +
-                        `💳 *Method:* ${data.method}\n` +
-                        `📲 *Sender:* ${data.sender}\n` +
-                        `🔑 *TrxID:* ${data.trx}\n` +
-                        `⏰ *Time:* ${data.time}`;
+        const text = `🚀 *New Order Alert*\n\n` +
+                     `📦 *Service:* ${orderData.service}\n` +
+                     `📊 *Quantity:* ${orderData.qty}\n` +
+                     `💰 *Paid:* ${orderData.total}\n` +
+                     `🔗 *Link:* ${orderData.link}\n` +
+                     `💳 *Method:* ${orderData.method}\n` +
+                     `📲 *Sender:* ${orderData.sender}\n` +
+                     `🔑 *TrxID:* ${orderData.trx}\n` +
+                     `⏰ *Time:* ${orderData.time}`;
 
-        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}&parse_mode=Markdown`)
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(text)}&parse_mode=Markdown`)
         .then(res => {
             if(res.ok) {
-                document.getElementById('res-service').innerText = data.service;
-                document.getElementById('res-method').innerText = data.method;
-                document.getElementById('res-number').innerText = data.sender;
-                document.getElementById('res-trx').innerText = data.trx;
-                document.getElementById('res-time').innerText = data.time;
                 document.getElementById('form-view').style.display = 'none';
                 document.getElementById('success-view').style.display = 'block';
             } else {
-                alert("Order failed! Please check connection.");
+                alert("Error submitting order.");
             }
         })
-        .catch(() => alert("Error connecting to server!"))
+        .catch(() => alert("Connection error!"))
         .finally(() => {
-            btn.innerHTML = originalText;
+            btn.innerHTML = oldText;
             btn.disabled = false;
         });
     });
 </script>
+
 </body>
 </html>
