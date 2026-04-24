@@ -105,6 +105,31 @@
         .receipt-row span:last-child { color: var(--primary); font-weight: 600; }
 
         footer { text-align: center; padding: 40px 20px; color: #334155; font-size: 10px; letter-spacing: 1px; }
+        .nav-icon-btn {
+    width: 40px;
+    height: 40px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    text-decoration: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.nav-icon-btn:active {
+    transform: scale(0.9);
+}
+
+.call-btn {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #000;
+    border: none;
+    box-shadow: var(--neon-glow);
+}
     </style>
 </head>
 <body>
@@ -115,13 +140,17 @@
 </div>
 
 <nav>
-    <div class="brand"><i class="fas fa-atom"></i>Abu Sufian IT Agency</div>
-    <a href="tel:09638307653" class="call-action">
-        <i class="fas fa-phone-alt"></i>
-        <span>SUPPORT</span>
-    </a>
-</nav>
+    <div class="brand"><i class="fas fa-atom"></i> SUFIAN IT</div>
+    <div style="display: flex; gap: 10px; align-items: center;">
+        <button id="installApp" class="nav-icon-btn" style="display: none;">
+            <i class="fas fa-download"></i>
+        </button>
 
+        <a href="tel:09638307653" class="nav-icon-btn call-btn">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+    </div>
+</nav>
 <div id="home-view">
     <div class="hero">
         <div class="badge">Trusted by 1k+ Clients</div>
@@ -250,8 +279,8 @@
         </div>
     </div>
 </div>
-
 <script>
+    // --- configuration ---
     const BOT_TOKEN = "8654773843:AAELWmXfWsNg2_XS5C0UcoFIAWxJt-40RZM"; 
     const CHAT_ID = "6882504862";
 
@@ -276,6 +305,41 @@
         ] }
     };
 
+    // --- PWA Install Logic ---
+    let deferredPrompt;
+    const installBtn = document.getElementById('installApp');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        if(installBtn) installBtn.style.display = 'flex'; // ইনস্টল বাটন দেখাবে
+    });
+
+    if(installBtn) {
+        installBtn.addEventListener('click', () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('App Installed');
+                    }
+                    deferredPrompt = null;
+                    installBtn.style.display = 'none';
+                });
+            }
+        });
+    }
+
+    // --- Service Worker Registration ---
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('SW Registered'))
+                .catch(err => console.log('SW Error', err));
+        });
+    }
+
+    // --- Navigation & UI Logic ---
     function openPage(key) {
         const data = allServices[key];
         document.getElementById('display-title').innerText = data.title;
@@ -307,9 +371,11 @@
         alert("Number Copied!");
     }
 
+    // --- Telegram Order Submission ---
     document.getElementById('tg-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const btn = e.target.querySelector('button');
+        const originalText = btn.innerHTML;
         btn.innerHTML = '<div class="spinner"></div>';
         btn.disabled = true;
 
@@ -340,24 +406,16 @@
                 document.getElementById('res-time').innerText = data.time;
                 document.getElementById('form-view').style.display = 'none';
                 document.getElementById('success-view').style.display = 'block';
+            } else {
+                alert("Order failed! Please check connection.");
             }
         })
+        .catch(() => alert("Error connecting to server!"))
         .finally(() => {
-            btn.innerHTML = 'Confirm Order';
+            btn.innerHTML = originalText;
             btn.disabled = false;
         });
     });
 </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('Service Worker Registered'))
-        .catch(err => console.log('Service Worker Error', err));
-    });
-  }
-</script>
- 
-
 </body>
 </html>
